@@ -207,8 +207,8 @@ const DietPlanner = () => {
     <div className="max-w-6xl mx-auto space-y-8">
       {/* Header */}
       <div className="text-center">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">Diet Planner</h1>
-        <p className="text-gray-600 text-lg">Track your nutrition and stay on target</p>
+        <h1 className="text-3xl font-bold text-gray-100 mb-4">Diet Planner</h1>
+        <p className="text-gray-400 text-lg">Track your nutrition and stay on target</p>
       </div>
 
       {/* AI Generated Diet Plan */}
@@ -250,7 +250,7 @@ const DietPlanner = () => {
           animate={{ opacity: 1, x: 0 }}
           className="card p-6"
         >
-          <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+          <h2 className="text-xl font-bold text-gray-100 mb-4 flex items-center">
             <Target className="h-5 w-5 text-primary-600 mr-2" />
             Daily Calories
           </h2>
@@ -259,7 +259,7 @@ const DietPlanner = () => {
             <div className="text-4xl font-bold text-primary-600 mb-2">
               {todaysCalories}
             </div>
-            <div className="text-gray-600">
+            <div className="text-gray-400">
               of {calorieGoal} calories
             </div>
           </div>
@@ -273,7 +273,7 @@ const DietPlanner = () => {
             />
           </div>
 
-          <div className="flex justify-between text-sm text-gray-600">
+          <div className="flex justify-between text-sm text-gray-400">
             <span>{Math.round(getCalorieProgress())}% Complete</span>
             <span>{calorieGoal - todaysCalories} remaining</span>
           </div>
@@ -294,7 +294,7 @@ const DietPlanner = () => {
           animate={{ opacity: 1, x: 0 }}
           className="card p-6"
         >
-          <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+          <h2 className="text-xl font-bold text-gray-100 mb-4 flex items-center">
             <Droplets className="h-5 w-5 text-blue-600 mr-2" />
             Water Intake
           </h2>
@@ -303,7 +303,7 @@ const DietPlanner = () => {
             <div className="text-4xl font-bold text-blue-600 mb-2">
               {waterIntake}ml
             </div>
-            <div className="text-gray-600">
+            <div className="text-gray-400">
               of {waterGoal}ml goal
             </div>
           </div>
@@ -315,7 +315,7 @@ const DietPlanner = () => {
             />
           </div>
 
-          <div className="flex justify-between text-sm text-gray-600 mb-4">
+          <div className="flex justify-between text-sm text-gray-400 mb-4">
             <span>{Math.round(getWaterProgress())}% Complete</span>
             <span>{waterGoal - waterIntake}ml remaining</span>
           </div>
@@ -340,7 +340,7 @@ const DietPlanner = () => {
       {/* Meals */}
       <div className="space-y-6">
         <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-bold text-gray-900">Today's Meals</h2>
+          <h2 className="text-2xl font-bold text-gray-100">Today's Meals</h2>
           <button
             onClick={() => setShowAddMeal(!showAddMeal)}
             className="btn btn-primary flex items-center space-x-2"
@@ -357,10 +357,10 @@ const DietPlanner = () => {
             animate={{ opacity: 1, height: 'auto' }}
             className="card p-6"
           >
-            <h3 className="text-lg font-bold text-gray-900 mb-4">Add New Meal</h3>
+            <h3 className="text-lg font-bold text-gray-100 mb-4">Add New Meal</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-                <label className="label text-gray-700">Food Name</label>
+                <label className="label text-gray-300">Food Name</label>
                 <input
                   type="text"
                   value={newMeal.name}
@@ -370,7 +370,7 @@ const DietPlanner = () => {
                 />
               </div>
               <div>
-                <label className="label text-gray-700">Calories</label>
+                <label className="label text-gray-300">Calories</label>
                 <input
                   type="number"
                   value={newMeal.calories}
@@ -380,7 +380,7 @@ const DietPlanner = () => {
                 />
               </div>
               <div>
-                <label className="label text-gray-700">Meal Type</label>
+                <label className="label text-gray-300">Meal Type</label>
                 <select
                   value={newMeal.mealType}
                   onChange={(e) => setNewMeal({ ...newMeal, mealType: e.target.value })}
@@ -422,9 +422,9 @@ const DietPlanner = () => {
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center space-x-3">
                   <span className="text-2xl">{mealType.icon}</span>
-                  <h3 className="text-lg font-bold text-gray-900">{mealType.name}</h3>
+                  <h3 className="text-lg font-bold text-gray-100">{mealType.name}</h3>
                 </div>
-                <div className="text-sm text-gray-600">
+                <div className="text-sm text-gray-400">
                   {totalCalories} calories
                 </div>
               </div>
@@ -432,15 +432,15 @@ const DietPlanner = () => {
               {meals.length > 0 ? (
                 <div className="space-y-3">
                   {meals.map((meal) => (
-                    <div key={meal.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                    <div key={meal.id} className="flex items-center justify-between p-3 bg-dark-bg rounded-lg">
                       <div>
-                        <div className="font-medium text-gray-900">{meal.name}</div>
-                        <div className="text-sm text-gray-600">
+                        <div className="font-medium text-gray-100">{meal.name}</div>
+                        <div className="text-sm text-gray-400">
                           {new Date(meal.timestamp).toLocaleTimeString()}
                         </div>
                       </div>
                       <div className="flex items-center space-x-3">
-                        <span className="text-sm font-medium text-gray-700">
+                        <span className="text-sm font-medium text-gray-300">
                           {meal.calories} cal
                         </span>
                         <button
@@ -471,7 +471,7 @@ const DietPlanner = () => {
         transition={{ delay: 0.5 }}
         className="card p-6"
       >
-        <h2 className="text-xl font-bold text-gray-900 mb-4">Quick Add Foods</h2>
+        <h2 className="text-xl font-bold text-gray-100 mb-4">Quick Add Foods</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {sampleFoods.map((food, index) => (
             <button
@@ -484,10 +484,10 @@ const DietPlanner = () => {
                 });
                 setShowAddMeal(true);
               }}
-              className="p-3 text-left border border-gray-200 rounded-lg hover:border-primary-300 hover:bg-primary-50 transition-colors"
+              className="p-3 text-left border border-gray-800 rounded-lg hover:border-primary-300 hover:bg-primary-50 transition-colors"
             >
-              <div className="font-medium text-gray-900">{food.name}</div>
-              <div className="text-sm text-gray-600">{food.calories} cal</div>
+              <div className="font-medium text-gray-100">{food.name}</div>
+              <div className="text-sm text-gray-400">{food.calories} cal</div>
             </button>
           ))}
         </div>

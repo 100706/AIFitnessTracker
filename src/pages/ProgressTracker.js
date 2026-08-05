@@ -154,8 +154,8 @@ const ProgressTracker = () => {
     <div className="max-w-6xl mx-auto space-y-8">
       {/* Header */}
       <div className="text-center">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">Progress Tracker</h1>
-        <p className="text-gray-600 text-lg">Monitor your fitness journey and celebrate achievements</p>
+        <h1 className="text-3xl font-bold text-gray-100 mb-4">Progress Tracker</h1>
+        <p className="text-gray-400 text-lg">Monitor your fitness journey and celebrate achievements</p>
       </div>
 
       {/* AI Analysis */}
@@ -198,8 +198,8 @@ const ProgressTracker = () => {
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-600">{stat.title}</p>
-                  <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
+                  <p className="text-sm font-medium text-gray-400">{stat.title}</p>
+                  <p className="text-2xl font-bold text-gray-100">{stat.value}</p>
                   <p className="text-sm text-green-600">{stat.change}</p>
                 </div>
                 <div className={`p-3 rounded-lg bg-${stat.color}-100`}>
@@ -219,7 +219,7 @@ const ProgressTracker = () => {
           className="card p-6"
         >
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-bold text-gray-900 flex items-center">
+            <h2 className="text-xl font-bold text-gray-100 flex items-center">
               <Scale className="h-5 w-5 text-primary-600 mr-2" />
               Weight Tracking
             </h2>
@@ -233,7 +233,7 @@ const ProgressTracker = () => {
           </div>
 
           {showWeightForm && (
-            <div className="mb-4 p-4 bg-gray-50 rounded-lg">
+            <div className="mb-4 p-4 bg-dark-bg rounded-lg">
               <div className="flex items-center space-x-3">
                 <input
                   type="number"
@@ -256,7 +256,7 @@ const ProgressTracker = () => {
                   ? progress.weeklyWeight[progress.weeklyWeight.length - 1].weight 
                   : profile?.weight} kg
               </div>
-              <div className="text-sm text-gray-600">
+              <div className="text-sm text-gray-400">
                 {getWeightChange() !== 0 && (
                   <span className={getWeightChange() > 0 ? 'text-red-600' : 'text-green-600'}>
                     {getWeightChange() > 0 ? '+' : ''}{getWeightChange().toFixed(1)} kg from last entry
@@ -267,10 +267,10 @@ const ProgressTracker = () => {
 
             {progress.weeklyWeight && progress.weeklyWeight.length > 0 && (
               <div className="space-y-2">
-                <h3 className="font-medium text-gray-700">Recent Entries</h3>
+                <h3 className="font-medium text-gray-300">Recent Entries</h3>
                 {progress.weeklyWeight.slice(-5).map((entry, index) => (
-                  <div key={index} className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                    <span className="text-sm text-gray-600">
+                  <div key={index} className="flex justify-between items-center p-2 bg-dark-bg rounded">
+                    <span className="text-sm text-gray-400">
                       {new Date(entry.date).toLocaleDateString()}
                     </span>
                     <span className="font-medium">{entry.weight} kg</span>
@@ -288,7 +288,7 @@ const ProgressTracker = () => {
           className="card p-6"
         >
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-bold text-gray-900 flex items-center">
+            <h2 className="text-xl font-bold text-gray-100 flex items-center">
               <Ruler className="h-5 w-5 text-success-600 mr-2" />
               Body Measurements
             </h2>
@@ -304,7 +304,7 @@ const ProgressTracker = () => {
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="label text-gray-700">Chest (cm)</label>
+                <label className="label text-gray-300">Chest (cm)</label>
                 <input
                   type="number"
                   value={newMeasurements.chest}
@@ -314,7 +314,7 @@ const ProgressTracker = () => {
                 />
               </div>
               <div>
-                <label className="label text-gray-700">Waist (cm)</label>
+                <label className="label text-gray-300">Waist (cm)</label>
                 <input
                   type="number"
                   value={newMeasurements.waist}
@@ -324,7 +324,7 @@ const ProgressTracker = () => {
                 />
               </div>
               <div>
-                <label className="label text-gray-700">Hips (cm)</label>
+                <label className="label text-gray-300">Hips (cm)</label>
                 <input
                   type="number"
                   value={newMeasurements.hips}
@@ -334,7 +334,7 @@ const ProgressTracker = () => {
                 />
               </div>
               <div>
-                <label className="label text-gray-700">Arms (cm)</label>
+                <label className="label text-gray-300">Arms (cm)</label>
                 <input
                   type="number"
                   value={newMeasurements.arms}
@@ -347,10 +347,10 @@ const ProgressTracker = () => {
 
             {progress.weeklyMeasurements && progress.weeklyMeasurements.length > 0 && (
               <div className="space-y-2">
-                <h3 className="font-medium text-gray-700">Recent Measurements</h3>
+                <h3 className="font-medium text-gray-300">Recent Measurements</h3>
                 {progress.weeklyMeasurements.slice(-3).map((entry, index) => (
-                  <div key={index} className="p-3 bg-gray-50 rounded">
-                    <div className="text-sm text-gray-600 mb-2">
+                  <div key={index} className="p-3 bg-dark-bg rounded">
+                    <div className="text-sm text-gray-400 mb-2">
                       {new Date(entry.date).toLocaleDateString()}
                     </div>
                     <div className="grid grid-cols-2 gap-2 text-sm">
@@ -376,7 +376,7 @@ const ProgressTracker = () => {
         transition={{ delay: 0.3 }}
         className="card p-6"
       >
-        <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+        <h2 className="text-xl font-bold text-gray-100 mb-4 flex items-center">
           <Trophy className="h-5 w-5 text-warning-600 mr-2" />
           Streak Milestones
         </h2>
@@ -399,7 +399,7 @@ const ProgressTracker = () => {
           transition={{ delay: 0.4 }}
           className="card p-6"
         >
-          <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+          <h2 className="text-xl font-bold text-gray-100 mb-4 flex items-center">
             <Trophy className="h-5 w-5 text-warning-600 mr-2" />
             Recent Achievements
           </h2>
@@ -409,8 +409,8 @@ const ProgressTracker = () => {
                 <div className="flex items-center space-x-3">
                   <Trophy className="h-5 w-5 text-warning-600" />
                   <div>
-                    <div className="font-medium text-gray-900">{achievement.name}</div>
-                    <div className="text-sm text-gray-600">{achievement.description}</div>
+                    <div className="font-medium text-gray-100">{achievement.name}</div>
+                    <div className="text-sm text-gray-400">{achievement.description}</div>
                   </div>
                 </div>
                 <div className="text-right">
@@ -433,20 +433,20 @@ const ProgressTracker = () => {
           transition={{ delay: 0.5 }}
           className="card p-6"
         >
-          <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+          <h2 className="text-xl font-bold text-gray-100 mb-4 flex items-center">
             <Activity className="h-5 w-5 text-danger-600 mr-2" />
             Workout History
           </h2>
           <div className="space-y-3">
             {progress.workoutHistory.slice(-10).map((workout, index) => (
-              <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+              <div key={index} className="flex items-center justify-between p-3 bg-dark-bg rounded-lg">
                 <div className="flex items-center space-x-3">
                   <div className="w-3 h-3 bg-success-500 rounded-full"></div>
                   <div>
-                    <div className="font-medium text-gray-900">
+                    <div className="font-medium text-gray-100">
                       {new Date(workout.date).toLocaleDateString()}
                     </div>
-                    <div className="text-sm text-gray-600">
+                    <div className="text-sm text-gray-400">
                       {workout.exercises?.length || 0} exercises • {Math.floor(workout.duration / 60)}m {workout.duration % 60}s
                     </div>
                   </div>

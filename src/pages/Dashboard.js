@@ -194,7 +194,7 @@ const Dashboard = () => {
           </div>
           <div className="w-full bg-primary-700 rounded-full h-2">
             <div 
-              className="bg-white h-2 rounded-full transition-all duration-300"
+              className="bg-dark-cardSolid h-2 rounded-full transition-all duration-300"
               style={{ width: `${levelProgress.progressPercentage}%` }}
             />
           </div>
@@ -215,8 +215,8 @@ const Dashboard = () => {
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-600">{stat.title}</p>
-                  <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
+                  <p className="text-sm font-medium text-gray-400">{stat.title}</p>
+                  <p className="text-2xl font-bold text-gray-100">{stat.value}</p>
                 </div>
                 <div className={`p-3 rounded-lg bg-${stat.color}-100`}>
                   <Icon className={`h-6 w-6 text-${stat.color}-600`} />
@@ -236,25 +236,25 @@ const Dashboard = () => {
           transition={{ delay: 0.4 }}
           className="card p-6"
         >
-          <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+          <h2 className="text-xl font-bold text-gray-100 mb-4 flex items-center">
             <Heart className="h-5 w-5 text-red-500 mr-2" />
             Health Overview
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center">
-              <div className="text-3xl font-bold text-gray-900">{bmi}</div>
-              <div className="text-sm text-gray-600">BMI</div>
+              <div className="text-3xl font-bold text-gray-100">{bmi}</div>
+              <div className="text-sm text-gray-400">BMI</div>
               <div className={`text-sm font-medium text-${bmiCategory.color}-600`}>
                 {bmiCategory.category}
               </div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-gray-900">{profile.weight} kg</div>
-              <div className="text-sm text-gray-600">Current Weight</div>
+              <div className="text-3xl font-bold text-gray-100">{profile.weight} kg</div>
+              <div className="text-sm text-gray-400">Current Weight</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-gray-900">{profile.height}</div>
-              <div className="text-sm text-gray-600">Height</div>
+              <div className="text-3xl font-bold text-gray-100">{profile.height}</div>
+              <div className="text-sm text-gray-400">Height</div>
             </div>
           </div>
         </motion.div>
@@ -267,13 +267,13 @@ const Dashboard = () => {
         transition={{ delay: 0.45 }}
         className="card p-6"
       >
-        <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+        <h2 className="text-xl font-bold text-gray-100 mb-4 flex items-center">
           <Dumbbell className="h-5 w-5 text-primary-600 mr-2" />
           Training Preferences
         </h2>
         <div className="space-y-4">
           <div>
-            <h3 className="font-medium text-gray-900 mb-2">Training Methods</h3>
+            <h3 className="font-medium text-gray-100 mb-2">Training Methods</h3>
             <div className="flex flex-wrap gap-2">
               {Array.isArray(profile.trainingMethod) ? (
                 profile.trainingMethod.map((method, index) => (
@@ -292,7 +292,7 @@ const Dashboard = () => {
             </div>
           </div>
           <div>
-            <h3 className="font-medium text-gray-900 mb-2">Available Equipment</h3>
+            <h3 className="font-medium text-gray-100 mb-2">Available Equipment</h3>
             <div className="flex flex-wrap gap-2">
               {profile.availableEquipment?.map((equipment, index) => (
                 <span
@@ -306,12 +306,12 @@ const Dashboard = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <h3 className="font-medium text-gray-900 mb-1">Experience Level</h3>
-              <p className="text-gray-600">{profile.experience}</p>
+              <h3 className="font-medium text-gray-100 mb-1">Experience Level</h3>
+              <p className="text-gray-400">{profile.experience}</p>
             </div>
             <div>
-              <h3 className="font-medium text-gray-900 mb-1">Available Time</h3>
-              <p className="text-gray-600">{profile.availableTime}</p>
+              <h3 className="font-medium text-gray-100 mb-1">Available Time</h3>
+              <p className="text-gray-400">{profile.availableTime}</p>
             </div>
           </div>
         </div>
@@ -324,7 +324,7 @@ const Dashboard = () => {
         transition={{ delay: 0.5 }}
         className="card p-6"
       >
-        <h2 className="text-xl font-bold text-gray-900 mb-6">Quick Actions</h2>
+        <h2 className="text-xl font-bold text-gray-100 mb-6">Quick Actions</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {quickActions.map((action, index) => {
             const Icon = action.icon;
@@ -341,8 +341,8 @@ const Dashboard = () => {
                     <Icon className={`h-5 w-5 text-${action.color}-600`} />
                   </div>
                   <div>
-                    <h3 className="font-medium text-gray-900">{action.title}</h3>
-                    <p className="text-sm text-gray-600">{action.description}</p>
+                    <h3 className="font-medium text-gray-100">{action.title}</h3>
+                    <p className="text-sm text-gray-400">{action.description}</p>
                   </div>
                 </div>
               </motion.a>
@@ -360,7 +360,7 @@ const Dashboard = () => {
           transition={{ delay: 0.6 }}
           className="card p-6"
         >
-          <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+          <h2 className="text-xl font-bold text-gray-100 mb-4 flex items-center">
             <Calendar className="h-5 w-5 text-primary-600 mr-2" />
             Today's Workout
           </h2>
@@ -378,7 +378,7 @@ const Dashboard = () => {
           ) : (
             <div className="text-center py-8">
               <Calendar className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-600">No workout plan generated yet</p>
+              <p className="text-gray-400">No workout plan generated yet</p>
               <button className="btn btn-primary mt-4">
                 Generate Workout Plan
               </button>
@@ -393,7 +393,7 @@ const Dashboard = () => {
           transition={{ delay: 0.7 }}
           className="card p-6"
         >
-          <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+          <h2 className="text-xl font-bold text-gray-100 mb-4 flex items-center">
             <Utensils className="h-5 w-5 text-success-600 mr-2" />
             Today's Nutrition
           </h2>
@@ -411,7 +411,7 @@ const Dashboard = () => {
           ) : (
             <div className="text-center py-8">
               <Utensils className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-600">No diet plan generated yet</p>
+              <p className="text-gray-400">No diet plan generated yet</p>
               <button className="btn btn-success mt-4">
                 Generate Diet Plan
               </button>
@@ -428,7 +428,7 @@ const Dashboard = () => {
           transition={{ delay: 0.8 }}
           className="card p-6"
         >
-          <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+          <h2 className="text-xl font-bold text-gray-100 mb-4 flex items-center">
             <Trophy className="h-5 w-5 text-warning-600 mr-2" />
             Recent Achievements
           </h2>
@@ -438,8 +438,8 @@ const Dashboard = () => {
                 <div className="flex items-center space-x-3">
                   <Trophy className="h-6 w-6 text-warning-600" />
                   <div>
-                    <h3 className="font-medium text-gray-900">{achievement.name}</h3>
-                    <p className="text-sm text-gray-600">+{achievement.points} points</p>
+                    <h3 className="font-medium text-gray-100">{achievement.name}</h3>
+                    <p className="text-sm text-gray-400">+{achievement.points} points</p>
                   </div>
                 </div>
               </div>

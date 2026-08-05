@@ -311,8 +311,8 @@ const Rewards = () => {
     <div className="max-w-6xl mx-auto space-y-8">
       {/* Header */}
       <div className="text-center">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">Rewards & Achievements</h1>
-        <p className="text-gray-600 text-lg">Earn points, unlock achievements, and level up your fitness journey</p>
+        <h1 className="text-3xl font-bold text-gray-100 mb-4">Rewards & Achievements</h1>
+        <p className="text-gray-400 text-lg">Earn points, unlock achievements, and level up your fitness journey</p>
       </div>
 
       {/* Stats Overview */}
@@ -323,7 +323,7 @@ const Rewards = () => {
           className="card p-6 text-center"
         >
           <div className="text-3xl font-bold text-primary-600 mb-2">{progress.points || 0}</div>
-          <div className="text-gray-600">Total Points</div>
+          <div className="text-gray-400">Total Points</div>
         </motion.div>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -332,7 +332,7 @@ const Rewards = () => {
           className="card p-6 text-center"
         >
           <div className="text-3xl font-bold text-warning-600 mb-2">{progress.level || 1}</div>
-          <div className="text-gray-600">Current Level</div>
+          <div className="text-gray-400">Current Level</div>
         </motion.div>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -341,7 +341,7 @@ const Rewards = () => {
           className="card p-6 text-center"
         >
           <div className="text-3xl font-bold text-success-600 mb-2">{unlockedRewards.length}</div>
-          <div className="text-gray-600">Achievements Unlocked</div>
+          <div className="text-gray-400">Achievements Unlocked</div>
         </motion.div>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -350,7 +350,7 @@ const Rewards = () => {
           className="card p-6 text-center"
         >
           <div className="text-3xl font-bold text-danger-600 mb-2">{progress.streak || 0}</div>
-          <div className="text-gray-600">Current Streak</div>
+          <div className="text-gray-400">Current Streak</div>
         </motion.div>
       </div>
 
@@ -365,7 +365,7 @@ const Rewards = () => {
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
                 selectedCategory === category.id
                   ? 'bg-primary-100 text-primary-700 border-2 border-primary-300'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  : 'bg-gray-800 text-gray-400 hover:bg-gray-200'
               }`}
             >
               <Icon className="h-4 w-4" />
@@ -391,7 +391,7 @@ const Rewards = () => {
               className={`card p-6 relative overflow-hidden ${
                 reward.unlocked 
                   ? 'border-success-200 bg-success-50' 
-                  : 'border-gray-200 bg-gray-50'
+                  : 'border-gray-800 bg-dark-bg'
               }`}
             >
               {/* Unlocked Badge */}
@@ -404,7 +404,7 @@ const Rewards = () => {
               <div className="text-center mb-4">
                 <div className="text-4xl mb-2">{reward.emoji}</div>
                 <div className={`p-3 rounded-lg mx-auto w-fit ${
-                  reward.unlocked ? 'bg-success-100' : 'bg-gray-100'
+                  reward.unlocked ? 'bg-success-100' : 'bg-gray-800'
                 }`}>
                   <Icon className={`h-6 w-6 ${
                     reward.unlocked ? 'text-success-600' : 'text-gray-400'
@@ -414,11 +414,11 @@ const Rewards = () => {
 
               <div className="text-center mb-4">
                 <h3 className={`text-lg font-bold mb-2 ${
-                  reward.unlocked ? 'text-success-800' : 'text-gray-700'
+                  reward.unlocked ? 'text-success-800' : 'text-gray-300'
                 }`}>
                   {reward.name}
                 </h3>
-                <p className="text-sm text-gray-600 mb-2">{reward.description}</p>
+                <p className="text-sm text-gray-400 mb-2">{reward.description}</p>
                 {reward.points > 0 && (
                   <div className="text-sm font-medium text-warning-600">
                     +{reward.points} points
@@ -428,7 +428,7 @@ const Rewards = () => {
 
               {/* Progress Bar */}
               <div className="mb-4">
-                <div className="flex justify-between text-xs text-gray-600 mb-1">
+                <div className="flex justify-between text-xs text-gray-400 mb-1">
                   <span>{currentValue} / {reward.requirement}</span>
                   <span>{Math.round(progressPercentage)}%</span>
                 </div>
@@ -469,7 +469,7 @@ const Rewards = () => {
           transition={{ delay: 0.5 }}
           className="card p-6"
         >
-          <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+          <h2 className="text-xl font-bold text-gray-100 mb-4 flex items-center">
             <Trophy className="h-5 w-5 text-warning-600 mr-2" />
             Recent Achievements
           </h2>
@@ -479,8 +479,8 @@ const Rewards = () => {
                 <div className="flex items-center space-x-3">
                   <Trophy className="h-5 w-5 text-warning-600" />
                   <div>
-                    <div className="font-medium text-gray-900">{achievement.name}</div>
-                    <div className="text-sm text-gray-600">{achievement.description}</div>
+                    <div className="font-medium text-gray-100">{achievement.name}</div>
+                    <div className="text-sm text-gray-400">{achievement.description}</div>
                   </div>
                 </div>
                 <div className="text-right">
@@ -502,7 +502,7 @@ const Rewards = () => {
         transition={{ delay: 0.6 }}
         className="card p-6"
       >
-        <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+        <h2 className="text-xl font-bold text-gray-100 mb-4 flex items-center">
           <Crown className="h-5 w-5 text-warning-600 mr-2" />
           Level Progress
         </h2>
@@ -510,7 +510,7 @@ const Rewards = () => {
           <div className="text-3xl font-bold text-warning-600 mb-2">
             Level {progress.level || 1}
           </div>
-          <div className="text-gray-600">
+          <div className="text-gray-400">
             {(progress.points || 0) % 100} / 100 XP to next level
           </div>
         </div>

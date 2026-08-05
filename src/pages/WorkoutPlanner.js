@@ -193,7 +193,7 @@ const WorkoutPlanner = () => {
           <div className="mt-4">
             <div className="w-full bg-primary-700 rounded-full h-2">
               <div 
-                className="bg-white h-2 rounded-full transition-all duration-300"
+                className="bg-dark-cardSolid h-2 rounded-full transition-all duration-300"
                 style={{ width: `${progressPercentage}%` }}
               />
             </div>
@@ -215,22 +215,22 @@ const WorkoutPlanner = () => {
             <div className="w-24 h-24 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <Dumbbell className="h-12 w-12 text-primary-600" />
             </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">{exercise.name}</h2>
-            <p className="text-gray-600">Set {currentExercise + 1} of {exercise.sets}</p>
+            <h2 className="text-3xl font-bold text-gray-100 mb-2">{exercise.name}</h2>
+            <p className="text-gray-400">Set {currentExercise + 1} of {exercise.sets}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <div className="text-center">
               <div className="text-2xl font-bold text-primary-600">{exercise.sets}</div>
-              <div className="text-sm text-gray-600">Sets</div>
+              <div className="text-sm text-gray-400">Sets</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-primary-600">{exercise.reps}</div>
-              <div className="text-sm text-gray-600">Reps</div>
+              <div className="text-sm text-gray-400">Reps</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-primary-600">{exercise.rest}s</div>
-              <div className="text-sm text-gray-600">Rest</div>
+              <div className="text-sm text-gray-400">Rest</div>
             </div>
           </div>
 
@@ -254,7 +254,7 @@ const WorkoutPlanner = () => {
 
         {/* Exercise List */}
         <div className="card p-6">
-          <h3 className="text-lg font-bold text-gray-900 mb-4">Workout Plan</h3>
+          <h3 className="text-lg font-bold text-gray-100 mb-4">Workout Plan</h3>
           <div className="space-y-3">
             {currentWorkout.exercises.map((ex, index) => (
               <div
@@ -264,7 +264,7 @@ const WorkoutPlanner = () => {
                     ? 'bg-primary-100 border-2 border-primary-300'
                     : index < currentExercise
                     ? 'bg-success-100 border border-success-300'
-                    : 'bg-gray-50 border border-gray-200'
+                    : 'bg-dark-bg border border-gray-800'
                 }`}
               >
                 <div className="flex items-center space-x-3">
@@ -277,7 +277,7 @@ const WorkoutPlanner = () => {
                   )}
                   <span className="font-medium">{ex.name}</span>
                 </div>
-                <div className="text-sm text-gray-600">
+                <div className="text-sm text-gray-400">
                   {ex.sets} sets × {ex.reps} reps
                 </div>
               </div>
@@ -292,8 +292,8 @@ const WorkoutPlanner = () => {
     <div className="max-w-6xl mx-auto space-y-8">
       {/* Header */}
       <div className="text-center">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">Workout Planner</h1>
-        <p className="text-gray-600 text-lg">Choose your workout and start training</p>
+        <h1 className="text-3xl font-bold text-gray-100 mb-4">Workout Planner</h1>
+        <p className="text-gray-400 text-lg">Choose your workout and start training</p>
       </div>
 
       {/* AI Generated Workout */}
@@ -329,7 +329,7 @@ const WorkoutPlanner = () => {
 
       {/* Quick Workouts */}
       <div>
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">Quick Workouts</h2>
+        <h2 className="text-2xl font-bold text-gray-100 mb-6">Quick Workouts</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {sampleWorkouts.map((workout, index) => (
             <motion.div
@@ -340,7 +340,7 @@ const WorkoutPlanner = () => {
               className="card p-6 hover:shadow-lg transition-shadow"
             >
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-bold text-gray-900">{workout.name}</h3>
+                <h3 className="text-lg font-bold text-gray-100">{workout.name}</h3>
                 <span className={`px-2 py-1 rounded-full text-xs font-medium ${
                   workout.difficulty === 'Beginner' ? 'bg-success-100 text-success-700' :
                   workout.difficulty === 'Intermediate' ? 'bg-warning-100 text-warning-700' :
@@ -351,11 +351,11 @@ const WorkoutPlanner = () => {
               </div>
 
               <div className="space-y-3 mb-6">
-                <div className="flex items-center text-sm text-gray-600">
+                <div className="flex items-center text-sm text-gray-400">
                   <Clock className="h-4 w-4 mr-2" />
                   {workout.duration} minutes
                 </div>
-                <div className="flex items-center text-sm text-gray-600">
+                <div className="flex items-center text-sm text-gray-400">
                   <Target className="h-4 w-4 mr-2" />
                   {workout.exercises.length} exercises
                 </div>
@@ -364,7 +364,7 @@ const WorkoutPlanner = () => {
               <div className="space-y-2 mb-6">
                 {workout.exercises.slice(0, 3).map((exercise, exIndex) => (
                   <div key={exIndex} className="flex justify-between text-sm">
-                    <span className="text-gray-700">{exercise.name}</span>
+                    <span className="text-gray-300">{exercise.name}</span>
                     <span className="text-gray-500">{exercise.sets}×{exercise.reps}</span>
                   </div>
                 ))}
@@ -400,11 +400,11 @@ const WorkoutPlanner = () => {
         </h2>
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-lg font-bold text-gray-900">{recommendedWorkout.name}</h3>
-            <p className="text-gray-600">
+            <h3 className="text-lg font-bold text-gray-100">{recommendedWorkout.name}</h3>
+            <p className="text-gray-400">
               Based on your goals: {profile?.fitnessGoals?.join(', ') || 'General fitness'}
             </p>
-            <div className="flex items-center space-x-4 mt-2 text-sm text-gray-600">
+            <div className="flex items-center space-x-4 mt-2 text-sm text-gray-400">
               <span className="flex items-center">
                 <Clock className="h-4 w-4 mr-1" />
                 {recommendedWorkout.duration} min
@@ -433,15 +433,15 @@ const WorkoutPlanner = () => {
           transition={{ delay: 0.5 }}
           className="card p-6"
         >
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Recent Workouts</h2>
+          <h2 className="text-xl font-bold text-gray-100 mb-4">Recent Workouts</h2>
           <div className="space-y-3">
             {progress.workoutHistory.slice(-5).map((workout, index) => (
-              <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+              <div key={index} className="flex items-center justify-between p-3 bg-dark-bg rounded-lg">
                 <div>
-                  <div className="font-medium text-gray-900">
+                  <div className="font-medium text-gray-100">
                     {new Date(workout.date).toLocaleDateString()}
                   </div>
-                  <div className="text-sm text-gray-600">
+                  <div className="text-sm text-gray-400">
                     {workout.exercises?.length || 0} exercises • {formatTime(workout.duration)}
                   </div>
                 </div>

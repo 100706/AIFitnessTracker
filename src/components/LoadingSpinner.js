@@ -22,7 +22,7 @@ const LoadingSpinner = ({ size = 'md', text = 'Loading...' }) => {
       />
       {text && (
         <motion.p
-          className="text-gray-600 text-sm"
+          className="text-gray-400 text-sm"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}

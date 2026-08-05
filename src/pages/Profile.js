@@ -24,10 +24,10 @@ const Profile = () => {
   // Safety check to prevent errors if profile is not loaded yet
   if (!profile) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-dark-bg flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading profile...</p>
+          <p className="text-gray-400">Loading profile...</p>
         </div>
       </div>
     );
@@ -178,7 +178,7 @@ const Profile = () => {
       return (
         <div className="flex flex-wrap gap-2">
           {Array.isArray(value) ? value.map((item, index) => (
-            <span key={index} className="px-2 py-1 bg-gray-100 rounded-full text-sm">
+            <span key={index} className="px-2 py-1 bg-gray-800 rounded-full text-sm">
               {item || 'Empty'}
             </span>
           )) : (
@@ -188,7 +188,7 @@ const Profile = () => {
       );
     }
 
-    return <span className="text-gray-900">{value || 'Not specified'}</span>;
+    return <span className="text-gray-100">{value || 'Not specified'}</span>;
   };
 
   return (
@@ -196,8 +196,8 @@ const Profile = () => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Profile</h1>
-          <p className="text-gray-600 mt-2">Manage your personal information and preferences</p>
+          <h1 className="text-3xl font-bold text-gray-100">Profile</h1>
+          <p className="text-gray-400 mt-2">Manage your personal information and preferences</p>
         </div>
         <div className="flex space-x-3">
           {isEditing ? (
@@ -236,18 +236,20 @@ const Profile = () => {
                 <div className={`p-2 rounded-lg bg-${section.color}-100`}>
                   <Icon className={`h-5 w-5 text-${section.color}-600`} />
                 </div>
-                <h2 className="text-xl font-bold text-gray-900">{section.title}</h2>
+                <h2 className="text-xl font-bold text-gray-100">{section.title}</h2>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {section.fields.map((field) => {
                   const value = isEditing ? editData[field.key] : profile[field.key];
                   return (
-                    <div key={field.key} className="space-y-2">
-                      <label className="label text-gray-700">
-                        {field.label}
+                    <div key={field.key} className={isEditing ? "space-y-2" : "flex flex-col sm:flex-row sm:items-baseline sm:space-x-2 mb-2"}>
+                      <label className={`text-gray-100 ${isEditing ? 'label text-gray-300' : 'font-bold'}`}>
+                        {field.label}{!isEditing && ':'}
                       </label>
-                      {renderField(field, value)}
+                      <div className={isEditing ? "" : "font-normal text-gray-300"}>
+                        {renderField(field, value)}
+                      </div>
                     </div>
                   );
                 })}
@@ -315,8 +317,8 @@ const Profile = () => {
         transition={{ delay: 0.9 }}
         className="card p-6 border-danger-200"
       >
-        <h2 className="text-xl font-bold text-gray-900 mb-4">Danger Zone</h2>
-        <p className="text-gray-600 mb-4">
+        <h2 className="text-xl font-bold text-gray-100 mb-4">Danger Zone</h2>
+        <p className="text-gray-400 mb-4">
           This will reset your entire profile and you'll need to complete the questionnaire again.
         </p>
         <button 

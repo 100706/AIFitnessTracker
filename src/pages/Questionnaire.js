@@ -561,7 +561,7 @@ const Questionnaire = () => {
                       handleInputChange(question.id, selectedValues.filter(v => v !== option));
                     }
                   }}
-                  className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                  className="rounded border-gray-700 text-primary-600 focus:ring-primary-500"
                 />
                 <span className="text-sm">{option}</span>
               </label>
@@ -597,7 +597,7 @@ const Questionnaire = () => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <LoadingSpinner />
-          <p className="mt-4 text-lg text-gray-600">Generating your personalized fitness plan...</p>
+          <p className="mt-4 text-lg text-gray-400">Generating your personalized fitness plan...</p>
         </div>
       </div>
     );
@@ -607,10 +607,10 @@ const Questionnaire = () => {
     <div className="max-w-4xl mx-auto">
       {/* Header */}
       <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">
+        <h1 className="text-4xl font-bold text-gray-100 mb-4">
           Welcome to FitnessAI
         </h1>
-        <p className="text-xl text-gray-600 mb-6">
+        <p className="text-xl text-gray-400 mb-6">
           Let's create your personalized fitness journey
         </p>
         
@@ -654,7 +654,7 @@ const Questionnaire = () => {
                     ? `bg-${step.color}-100 text-${step.color}-700` 
                     : isCompleted 
                     ? 'bg-success-100 text-success-700' 
-                    : 'bg-gray-100 text-gray-500'
+                    : 'bg-gray-800 text-gray-500'
                 }`}
               >
                 <Icon className="h-4 w-4" />
@@ -677,14 +677,14 @@ const Questionnaire = () => {
         >
           {steps[currentStep].id === 'review' ? (
             <div className="space-y-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Review Your Information</h2>
+              <h2 className="text-2xl font-bold text-gray-100 mb-6">Review Your Information</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {Object.entries(formData).map(([key, value]) => (
                   <div key={key} className="space-y-1">
-                    <h3 className="font-medium text-gray-700 capitalize">
+                    <h3 className="font-medium text-gray-300 capitalize">
                       {key.replace(/([A-Z])/g, ' $1').trim()}
                     </h3>
-                    <p className="text-gray-600">
+                    <p className="text-gray-400">
                       {Array.isArray(value) ? value.join(', ') : value}
                     </p>
                   </div>
@@ -693,12 +693,12 @@ const Questionnaire = () => {
             </div>
           ) : (
             <div className="space-y-6">
-              <h2 className="text-2xl font-bold text-gray-900">
+              <h2 className="text-2xl font-bold text-gray-100">
                 {steps[currentStep].title}
               </h2>
               {questions[steps[currentStep].id]?.map((question) => (
                 <div key={question.id} className="space-y-2">
-                  <label className="label text-gray-700">
+                  <label className="label text-gray-300">
                     {question.label}
                     {question.required && <span className="text-red-500 ml-1">*</span>}
                   </label>

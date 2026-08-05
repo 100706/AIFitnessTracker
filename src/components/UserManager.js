@@ -103,7 +103,7 @@ const UserManager = ({ isOpen, onClose }) => {
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.9 }}
-        className="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden"
+        className="bg-dark-cardSolid rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden"
       >
         {/* Header */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-800 text-white p-6">
@@ -166,12 +166,12 @@ const UserManager = ({ isOpen, onClose }) => {
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
                   exit={{ opacity: 0, height: 0 }}
-                  className="mt-4 p-4 bg-gray-50 rounded-lg border"
+                  className="mt-4 p-4 bg-dark-bg rounded-lg border"
                 >
                   <h3 className="font-bold text-lg mb-4">Create New User</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="label text-gray-700">Username</label>
+                      <label className="label text-gray-300">Username</label>
                       <input
                         type="text"
                         value={newUser.username}
@@ -181,7 +181,7 @@ const UserManager = ({ isOpen, onClose }) => {
                       />
                     </div>
                     <div>
-                      <label className="label text-gray-700">Email (Optional)</label>
+                      <label className="label text-gray-300">Email (Optional)</label>
                       <input
                         type="email"
                         value={newUser.email}
@@ -191,7 +191,7 @@ const UserManager = ({ isOpen, onClose }) => {
                       />
                     </div>
                     <div>
-                      <label className="label text-gray-700">Avatar</label>
+                      <label className="label text-gray-300">Avatar</label>
                       <div className="grid grid-cols-6 gap-2">
                         {avatars.map(avatar => (
                           <button
@@ -200,7 +200,7 @@ const UserManager = ({ isOpen, onClose }) => {
                             className={`p-2 rounded-lg border-2 transition-colors ${
                               newUser.avatar === avatar.id 
                                 ? 'border-primary-500 bg-primary-100' 
-                                : 'border-gray-200 hover:border-gray-300'
+                                : 'border-gray-800 hover:border-gray-700'
                             }`}
                           >
                             <div className="text-2xl">{avatar.emoji}</div>
@@ -209,7 +209,7 @@ const UserManager = ({ isOpen, onClose }) => {
                       </div>
                     </div>
                     <div>
-                      <label className="label text-gray-700">Theme</label>
+                      <label className="label text-gray-300">Theme</label>
                       <div className="grid grid-cols-4 gap-2">
                         {themes.map(theme => (
                           <button
@@ -218,7 +218,7 @@ const UserManager = ({ isOpen, onClose }) => {
                             className={`p-2 rounded-lg border-2 transition-colors ${
                               newUser.theme === theme.id 
                                 ? 'border-primary-500' 
-                                : 'border-gray-200 hover:border-gray-300'
+                                : 'border-gray-800 hover:border-gray-700'
                             }`}
                             style={{ backgroundColor: theme.color }}
                           >
@@ -248,7 +248,7 @@ const UserManager = ({ isOpen, onClose }) => {
 
           {/* Users List */}
           <div>
-            <h3 className="text-lg font-bold text-gray-900 mb-4">All Users</h3>
+            <h3 className="text-lg font-bold text-gray-100 mb-4">All Users</h3>
             <div className="space-y-3">
               {sortedUsers.map((user, index) => (
                 <motion.div
@@ -259,7 +259,7 @@ const UserManager = ({ isOpen, onClose }) => {
                   className={`p-4 rounded-lg border-2 transition-all ${
                     user.id === currentUserId
                       ? 'border-primary-500 bg-primary-50'
-                      : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                      : 'border-gray-800 hover:border-gray-700 hover:bg-dark-bg'
                   }`}
                 >
                   <div className="flex items-center justify-between">
@@ -278,7 +278,7 @@ const UserManager = ({ isOpen, onClose }) => {
                       </div>
                       <div>
                         <h4 className="font-bold text-lg">{user.user.username}</h4>
-                        <div className="flex items-center space-x-4 text-sm text-gray-600">
+                        <div className="flex items-center space-x-4 text-sm text-gray-400">
                           <span className="flex items-center space-x-1">
                             <Zap className="h-4 w-4" />
                             <span>{user.progress?.points || 0} pts</span>
@@ -320,13 +320,13 @@ const UserManager = ({ isOpen, onClose }) => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
-                className="bg-white rounded-xl p-6 max-w-md w-full mx-4"
+                className="bg-dark-cardSolid rounded-xl p-6 max-w-md w-full mx-4"
               >
                 <h3 className="text-xl font-bold mb-4">Customize Profile</h3>
                 
                 <div className="space-y-4">
                   <div>
-                    <label className="label text-gray-700">Avatar</label>
+                    <label className="label text-gray-300">Avatar</label>
                     <div className="grid grid-cols-6 gap-2">
                       {avatars.map(avatar => (
                         <button
@@ -335,7 +335,7 @@ const UserManager = ({ isOpen, onClose }) => {
                           className={`p-2 rounded-lg border-2 transition-colors ${
                             customization.avatar === avatar.id 
                               ? 'border-primary-500 bg-primary-100' 
-                              : 'border-gray-200 hover:border-gray-300'
+                              : 'border-gray-800 hover:border-gray-700'
                           }`}
                         >
                           <div className="text-2xl">{avatar.emoji}</div>
@@ -345,7 +345,7 @@ const UserManager = ({ isOpen, onClose }) => {
                   </div>
                   
                   <div>
-                    <label className="label text-gray-700">Theme</label>
+                    <label className="label text-gray-300">Theme</label>
                     <div className="grid grid-cols-4 gap-2">
                       {themes.map(theme => (
                         <button
@@ -354,7 +354,7 @@ const UserManager = ({ isOpen, onClose }) => {
                           className={`p-2 rounded-lg border-2 transition-colors ${
                             customization.theme === theme.id 
                               ? 'border-primary-500' 
-                              : 'border-gray-200 hover:border-gray-300'
+                              : 'border-gray-800 hover:border-gray-700'
                           }`}
                           style={{ backgroundColor: theme.color }}
                         >

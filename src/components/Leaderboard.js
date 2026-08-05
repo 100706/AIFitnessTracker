@@ -114,7 +114,7 @@ const Leaderboard = ({ isOpen, onClose }) => {
       case 2:
         return <Award className="h-6 w-6 text-orange-500" />;
       default:
-        return <span className="text-lg font-bold text-gray-600">#{index + 1}</span>;
+        return <span className="text-lg font-bold text-gray-400">#{index + 1}</span>;
     }
   };
 
@@ -157,7 +157,7 @@ const Leaderboard = ({ isOpen, onClose }) => {
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.9 }}
-        className="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden"
+        className="bg-dark-cardSolid rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden"
       >
         {/* Header */}
         <div className="bg-gradient-to-r from-warning-600 to-warning-800 text-white p-6">
@@ -208,7 +208,7 @@ const Leaderboard = ({ isOpen, onClose }) => {
           {/* Filters */}
           <div className="mb-6 space-y-4">
             <div>
-              <label className="label text-gray-700 mb-2">Category</label>
+              <label className="label text-gray-300 mb-2">Category</label>
               <div className="flex flex-wrap gap-2">
                 {categories.map((category) => {
                   const Icon = category.icon;
@@ -219,7 +219,7 @@ const Leaderboard = ({ isOpen, onClose }) => {
                       className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
                         selectedCategory === category.id
                           ? `bg-${category.color}-100 text-${category.color}-700 border-2 border-${category.color}-300`
-                          : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                          : 'bg-gray-800 text-gray-400 hover:bg-gray-200'
                       }`}
                     >
                       <Icon className="h-4 w-4" />
@@ -231,7 +231,7 @@ const Leaderboard = ({ isOpen, onClose }) => {
             </div>
 
             <div>
-              <label className="label text-gray-700 mb-2">Timeframe</label>
+              <label className="label text-gray-300 mb-2">Timeframe</label>
               <div className="flex gap-2">
                 {timeframes.map((tf) => (
                   <button
@@ -240,7 +240,7 @@ const Leaderboard = ({ isOpen, onClose }) => {
                     className={`px-4 py-2 rounded-lg transition-colors ${
                       timeframe === tf.id
                         ? 'bg-primary-100 text-primary-700 border-2 border-primary-300'
-                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                        : 'bg-gray-800 text-gray-400 hover:bg-gray-200'
                     }`}
                   >
                     {tf.name}
@@ -252,7 +252,7 @@ const Leaderboard = ({ isOpen, onClose }) => {
 
           {/* Leaderboard */}
           <div className="space-y-3">
-            <h3 className="text-lg font-bold text-gray-900 mb-4">
+            <h3 className="text-lg font-bold text-gray-100 mb-4">
               Top {sortedUsers.length} Users
             </h3>
             
@@ -271,7 +271,7 @@ const Leaderboard = ({ isOpen, onClose }) => {
                       ? 'border-primary-500 bg-primary-50'
                       : index < 3
                       ? 'border-warning-300 bg-warning-50'
-                      : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                      : 'border-gray-800 hover:border-gray-700 hover:bg-dark-bg'
                   }`}
                 >
                   <div className="flex items-center justify-between">
@@ -282,7 +282,7 @@ const Leaderboard = ({ isOpen, onClose }) => {
                         </div>
                         {isCurrentUser && (
                           <div className="absolute -top-1 -right-1 w-4 h-4 bg-primary-500 rounded-full flex items-center justify-center">
-                            <div className="w-2 h-2 bg-white rounded-full"></div>
+                            <div className="w-2 h-2 bg-dark-cardSolid rounded-full"></div>
                           </div>
                         )}
                       </div>
@@ -293,7 +293,7 @@ const Leaderboard = ({ isOpen, onClose }) => {
                         </div>
                         <div>
                           <h4 className="font-bold text-lg">{user.user.username}</h4>
-                          <div className="flex items-center space-x-4 text-sm text-gray-600">
+                          <div className="flex items-center space-x-4 text-sm text-gray-400">
                             <span className="flex items-center space-x-1">
                               <Zap className="h-4 w-4" />
                               <span>{user.progress?.points || 0} pts</span>
@@ -309,8 +309,8 @@ const Leaderboard = ({ isOpen, onClose }) => {
                     </div>
                     
                     <div className="text-right">
-                      <div className="text-2xl font-bold text-gray-900">{value}</div>
-                      <div className="text-sm text-gray-600">
+                      <div className="text-2xl font-bold text-gray-100">{value}</div>
+                      <div className="text-sm text-gray-400">
                         {categories.find(c => c.id === selectedCategory)?.name}
                       </div>
                     </div>
@@ -340,23 +340,23 @@ const Leaderboard = ({ isOpen, onClose }) => {
 
           {/* Stats Summary */}
           <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="p-4 bg-gray-50 rounded-lg text-center">
-              <div className="text-2xl font-bold text-gray-900">
+            <div className="p-4 bg-dark-bg rounded-lg text-center">
+              <div className="text-2xl font-bold text-gray-100">
                 {sortedUsers.length}
               </div>
-              <div className="text-sm text-gray-600">Total Users</div>
+              <div className="text-sm text-gray-400">Total Users</div>
             </div>
-            <div className="p-4 bg-gray-50 rounded-lg text-center">
-              <div className="text-2xl font-bold text-gray-900">
+            <div className="p-4 bg-dark-bg rounded-lg text-center">
+              <div className="text-2xl font-bold text-gray-100">
                 {sortedUsers[0] ? getValue(sortedUsers[0], selectedCategory) : 0}
               </div>
-              <div className="text-sm text-gray-600">Highest Score</div>
+              <div className="text-sm text-gray-400">Highest Score</div>
             </div>
-            <div className="p-4 bg-gray-50 rounded-lg text-center">
-              <div className="text-2xl font-bold text-gray-900">
+            <div className="p-4 bg-dark-bg rounded-lg text-center">
+              <div className="text-2xl font-bold text-gray-100">
                 {Math.round(sortedUsers.reduce((sum, user) => sum + getValue(user, selectedCategory), 0) / sortedUsers.length) || 0}
               </div>
-              <div className="text-sm text-gray-600">Average Score</div>
+              <div className="text-sm text-gray-400">Average Score</div>
             </div>
           </div>
         </div>
