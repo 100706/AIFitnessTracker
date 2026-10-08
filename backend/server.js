@@ -1,6 +1,11 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const db = require('./database');
+const { GoogleGenerativeAI } = require('@google/generative-ai');
+
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+
 
 const app = express();
 app.use(cors());
@@ -86,6 +91,28 @@ app.get('/api/bodyweight/:userId', (req, res) => {
         }
         res.json(rows);
     });
+});
+
+// ── GEMINI AI ──────────────────────────────────────────────────────────────────
+
+app.post('/api/ai/generate', async (req, res) => {
+    try {
+        const { prompt } = req.body;
+        if (!prompt) {
+            return res.status(400).json({ error: 'Prompt is required' });
+        }
+        if (!process.env.GEMINI_API_KEY) {
+            return res.status(503).json({ error: 'Gemini API key not configured on server.' });
+        }
+
+        const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+        const result = await model.generateContent(prompt);
+        const text = result.response.text();
+        res.json({ response: text });
+    } catch (err) {
+        console.error('Gemini API error:', err.message);
+        res.status(500).json({ error: err.message });
+    }
 });
 
 app.listen(PORT, () => {

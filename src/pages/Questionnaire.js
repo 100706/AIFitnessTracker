@@ -626,17 +626,7 @@ const Questionnaire = () => {
         </p>
       </div>
 
-      {/* Ollama Connection Status */}
-      {!ollamaConnected && (
-        <div className="mb-6 p-4 bg-warning-50 border border-warning-200 rounded-lg">
-          <div className="flex items-center">
-            <AlertCircle className="h-5 w-5 text-warning-600 mr-2" />
-            <p className="text-warning-800">
-              AI features are not available. Please make sure Ollama is running with the llama3.2 model.
-            </p>
-          </div>
-        </div>
-      )}
+
 
       {/* Step Navigation */}
       <div className="flex justify-center mb-8">

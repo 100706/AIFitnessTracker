@@ -2,54 +2,40 @@ import React, { createContext, useContext, useState } from 'react';
 
 const OllamaContext = createContext();
 
+const BACKEND_URL = 'http://localhost:5000';
+
 export function OllamaProvider({ children }) {
-  const [isConnected, setIsConnected] = useState(false);
+  const [isConnected, setIsConnected] = useState(true); // Always true — Gemini is cloud-based
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  // checkConnection now just verifies our backend is reachable
   const checkConnection = async () => {
     try {
-      const response = await fetch('http://localhost:11434/api/tags');
-      if (response.ok) {
+      const res = await fetch(`${BACKEND_URL}/api/users`);
+      if (res.ok) {
         setIsConnected(true);
-        setError(null);
         return true;
-      } else {
-        setIsConnected(false);
-        setError('Ollama server not responding');
-        return false;
       }
-    } catch (err) {
-      setIsConnected(false);
-      setError('Cannot connect to Ollama server. Please make sure Ollama is running.');
+      return false;
+    } catch {
       return false;
     }
   };
 
-  const generateResponse = async (prompt, model = 'llama3.2') => {
+  const generateResponse = async (prompt) => {
     setIsLoading(true);
     setError(null);
-
     try {
-      const response = await fetch('http://localhost:11434/api/generate', {
+      const response = await fetch(`${BACKEND_URL}/api/ai/generate`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          model: model,
-          prompt: prompt,
-          stream: false,
-          options: {
-            temperature: 0.7,
-            top_p: 0.9,
-            max_tokens: 2000
-          }
-        }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt }),
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errData = await response.json();
+        throw new Error(errData.error || `Server error: ${response.status}`);
       }
 
       const data = await response.json();
@@ -63,87 +49,76 @@ export function OllamaProvider({ children }) {
   };
 
   const generateWorkoutPlan = async (userProfile) => {
-    const prompt = `You are a professional fitness trainer and nutritionist. Based on the following user profile, create a comprehensive workout plan.
+    const prompt = `You are a professional fitness trainer. Based on the following user profile, create a comprehensive, personalized workout plan.
 
 User Profile:
 - Name: ${userProfile.name}
 - Age: ${userProfile.age}
 - Gender: ${userProfile.gender}
 - Height: ${userProfile.height}
-- Weight: ${userProfile.weight}
+- Weight: ${userProfile.weight} kg
 - Body Type: ${userProfile.bodyType}
 - Activity Level: ${userProfile.activityLevel}
-- Fitness Goals: ${userProfile.fitnessGoals.join(', ')}
+- Fitness Goals: ${Array.isArray(userProfile.fitnessGoals) ? userProfile.fitnessGoals.join(', ') : userProfile.fitnessGoals}
 - Training Methods: ${Array.isArray(userProfile.trainingMethod) ? userProfile.trainingMethod.join(', ') : userProfile.trainingMethod}
-- Available Equipment: ${userProfile.availableEquipment.join(', ')}
+- Available Equipment: ${Array.isArray(userProfile.availableEquipment) ? userProfile.availableEquipment.join(', ') : userProfile.availableEquipment}
 - Experience Level: ${userProfile.experience}
-- Available Time: ${userProfile.availableTime}
-- Injuries/Medical Conditions: ${userProfile.injuries.join(', ') || 'None'}
-- Current Fitness Level: Strength: ${userProfile.strengthLevel}, Endurance: ${userProfile.enduranceLevel}
+- Available Time per week: ${userProfile.availableTime}
+- Injuries/Limitations: ${Array.isArray(userProfile.injuries) ? userProfile.injuries.join(', ') : userProfile.injuries || 'None'}
+- Medical Conditions: ${Array.isArray(userProfile.medicalConditions) ? userProfile.medicalConditions.join(', ') : userProfile.medicalConditions || 'None'}
 
-Please provide a detailed workout plan that incorporates their selected training methods. Include:
-1. Weekly schedule with specific days, combining different training methods
-2. Exercise selection with proper form instructions for each training method
-3. Sets, reps, and rest periods tailored to each method
-4. How to blend different training methods effectively
-5. Progression plan across all selected methods
-6. Safety considerations for each training type
-7. Modifications for different fitness levels
-8. Expected timeline for results
-9. Tips for transitioning between different training methods
+Please provide a detailed, structured weekly workout plan including:
+1. Weekly schedule (which days, which muscle groups)
+2. Specific exercises with sets, reps, and rest periods
+3. Warm-up and cool-down routines
+4. Progression plan for 4 weeks
+5. Safety tips and form cues
+6. Expected results timeline
 
-Format the response in a clear, structured way that's easy to follow.`;
+Format the response clearly with headers and bullet points.`;
 
     return await generateResponse(prompt);
   };
 
   const generateDietPlan = async (userProfile) => {
-    const prompt = `You are a professional nutritionist. Based on the following user profile, create a comprehensive diet plan.
+    const prompt = `You are a professional nutritionist. Based on the following user profile, create a detailed, personalized diet plan.
 
 User Profile:
 - Name: ${userProfile.name}
 - Age: ${userProfile.age}
 - Gender: ${userProfile.gender}
 - Height: ${userProfile.height}
-- Weight: ${userProfile.weight}
-- Body Type: ${userProfile.bodyType}
+- Weight: ${userProfile.weight} kg
 - Activity Level: ${userProfile.activityLevel}
-- Fitness Goals: ${userProfile.fitnessGoals.join(', ')}
-- Budget: ${userProfile.budget}
-- Food Preferences: ${userProfile.foodPreferences.join(', ')}
-- Allergies: ${userProfile.allergies.join(', ') || 'None'}
-- Medical Conditions: ${userProfile.medicalConditions.join(', ') || 'None'}
-- Current Diet: ${userProfile.currentDiet}
+- Fitness Goals: ${Array.isArray(userProfile.fitnessGoals) ? userProfile.fitnessGoals.join(', ') : userProfile.fitnessGoals}
+- Monthly Food Budget: ${userProfile.budget}
+- Dietary Preferences: ${Array.isArray(userProfile.foodPreferences) ? userProfile.foodPreferences.join(', ') : userProfile.foodPreferences}
+- Food Allergies: ${Array.isArray(userProfile.allergies) ? userProfile.allergies.join(', ') : userProfile.allergies || 'None'}
+- Medical Conditions: ${Array.isArray(userProfile.medicalConditions) ? userProfile.medicalConditions.join(', ') : userProfile.medicalConditions || 'None'}
 - Cooking Skills: ${userProfile.cookingSkills}
-- Meal Prep Time: ${userProfile.mealPrepTime}
-- Eating Out Frequency: ${userProfile.eatingOutFrequency}
-- Favorite Foods: ${userProfile.favoriteFoods.join(', ')}
-- Disliked Foods: ${userProfile.dislikedFoods.join(', ')}
+- Meal Prep Time Available: ${userProfile.mealPrepTime}
 
-Please provide a detailed diet plan including:
-1. Daily calorie target
-2. Macronutrient breakdown (protein, carbs, fats)
-3. Meal timing and frequency
-4. Specific food recommendations
-5. Sample meal plans for different days
-6. Budget-friendly alternatives
-7. Supplement recommendations
-8. Hydration guidelines
-9. Pre/post workout nutrition
-10. Shopping list suggestions
+Please provide:
+1. Daily calorie target with macronutrient breakdown (protein/carbs/fats in grams)
+2. Meal timing and frequency recommendations
+3. A 7-day sample meal plan with approximate calories per meal
+4. Grocery shopping list for the week
+5. Meal prep tips for the week
+6. Pre/post workout nutrition advice
+7. Hydration guidelines
+8. Budget-friendly swaps
 
-Format the response in a clear, structured way with practical meal ideas.`;
+Format the response clearly with headers and bullet points.`;
 
     return await generateResponse(prompt);
   };
 
   const generateProgressAnalysis = async (userProfile, progressData) => {
-    const prompt = `You are a fitness coach analyzing a user's progress. Based on their profile and progress data, provide insights and recommendations.
+    const prompt = `You are an expert fitness coach. Analyse the following user's progress and provide actionable insights.
 
-User Profile:
-- Goals: ${userProfile.fitnessGoals.join(', ')}
-- Training Methods: ${Array.isArray(userProfile.trainingMethod) ? userProfile.trainingMethod.join(', ') : userProfile.trainingMethod}
-- Timeline: ${userProfile.timeline}
+User Goals: ${Array.isArray(userProfile.fitnessGoals) ? userProfile.fitnessGoals.join(', ') : userProfile.fitnessGoals}
+Training Methods: ${Array.isArray(userProfile.trainingMethod) ? userProfile.trainingMethod.join(', ') : userProfile.trainingMethod}
+Target Timeline: ${userProfile.timeline}
 
 Progress Data:
 - Current Weight: ${progressData.currentWeight || 'Not tracked'}
@@ -151,41 +126,39 @@ Progress Data:
 - Workout Consistency: ${progressData.consistency?.workouts || 0}%
 - Diet Consistency: ${progressData.consistency?.diet || 0}%
 - Current Streak: ${progressData.streak || 0} days
-- Recent Achievements: ${progressData.achievements?.slice(-3).map(a => a.name).join(', ') || 'None'}
+- Points Earned: ${progressData.points || 0}
+- Level: ${progressData.level || 1}
+- Recent Achievements: ${progressData.achievements?.slice(-3).map(a => a.name).join(', ') || 'None yet'}
 
 Please provide:
-1. Progress analysis and insights
-2. What's working well
-3. Areas for improvement
-4. Specific recommendations for the next phase
-5. Motivation and encouragement
-6. Goal adjustments if needed
-7. Tips for better consistency
+1. Overall progress assessment
+2. What the user is doing well
+3. Key areas for improvement
+4. Specific, actionable recommendations for the next 2 weeks
+5. Encouragement and motivation
+6. Any goal adjustments you'd recommend
 
-Be encouraging but honest about areas that need work.`;
+Be honest but encouraging.`;
 
     return await generateResponse(prompt);
   };
 
   const generateMotivationalMessage = async (userProfile, context = 'general') => {
-    const prompt = `You are a motivational fitness coach. Generate an encouraging and personalized message for this user.
+    const prompt = `You are an inspiring fitness coach. Write a short, personalized motivational message for this user.
 
-User Profile:
-- Name: ${userProfile.name}
-- Goals: ${userProfile.fitnessGoals.join(', ')}
-- Current Streak: ${userProfile.progress?.streak || 0} days
-- Level: ${userProfile.progress?.level || 1}
-
+User's Name: ${userProfile.name || 'Athlete'}
+Goals: ${Array.isArray(userProfile.fitnessGoals) ? userProfile.fitnessGoals.join(', ') : (userProfile.fitnessGoals || 'general fitness')}
+Current Streak: ${userProfile.progress?.streak || 0} days
+Level: ${userProfile.progress?.level || 1}
 Context: ${context}
 
-Generate a motivational message that:
-1. Acknowledges their efforts
-2. Reinforces their goals
-3. Provides encouragement
-4. Includes a specific tip or advice
-5. Is personalized and genuine
+Write a motivational message (2-3 sentences max) that:
+- Feels personal and genuine (use their name)
+- Acknowledges their specific goals
+- Provides one concrete tip
+- Ends with high energy
 
-Keep it concise but impactful (2-3 sentences).`;
+Do not use generic platitudes. Make it feel like it's from a real coach who knows them.`;
 
     return await generateResponse(prompt);
   };
@@ -199,7 +172,7 @@ Keep it concise but impactful (2-3 sentences).`;
     generateWorkoutPlan,
     generateDietPlan,
     generateProgressAnalysis,
-    generateMotivationalMessage
+    generateMotivationalMessage,
   };
 
   return (

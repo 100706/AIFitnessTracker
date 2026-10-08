@@ -78,13 +78,19 @@ function AppContent() {
                 <Questionnaire />
               } 
             />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/workout" element={<WorkoutPlanner />} />
-            <Route path="/diet" element={<DietPlanner />} />
-            <Route path="/progress" element={<ProgressTracker />} />
-            <Route path="/rewards" element={<Rewards />} />
-            <Route path="/live-workout" element={<LiveWorkout />} />
+            {currentUser.profile?.completed ? (
+              <>
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/workout" element={<WorkoutPlanner />} />
+                <Route path="/diet" element={<DietPlanner />} />
+                <Route path="/progress" element={<ProgressTracker />} />
+                <Route path="/rewards" element={<Rewards />} />
+                <Route path="/live-workout" element={<LiveWorkout />} />
+              </>
+            ) : (
+              <Route path="*" element={<Navigate to="/" replace />} />
+            )}
           </Routes>
         </main>
       </div>
